@@ -3,41 +3,29 @@ package main
 import "fmt"
 
 func main() {
+	//declaración de variables
+	helloMessage := "Hello"
+	worldMessage := "world"
 
-	// Area de un cuadrado
+	//Println
+	fmt.Println(helloMessage, worldMessage)
+	fmt.Println(helloMessage, worldMessage)
 
-	const baseCuadrado = 10
-	areaCuadrado := baseCuadrado * baseCuadrado
-	fmt.Println("Area cuadrado: ", areaCuadrado)
+	//Printf
+	nombre := "Platzi"
+	cursos := 500
+	fmt.Printf("%s tiene más de %d cursos\n", nombre, cursos)
+	/*
+		%s el valor a traer es un string
+		%d el valor a traer es un número
+		%v no se sabe el tipo de dato que va a traer, la buena practica es especificar el tipo de dato
+	*/
 
-	x := 10
-	y := 50
+	//Sprintf
+	message := fmt.Sprintf("%s tiene más de %d cursos\n", nombre, cursos)
+	fmt.Print(message)
 
-	//suma
-	result := x + y
-	fmt.Println("Suma:", result)
-
-	//resta
-	result = y - x
-	fmt.Println("Resta:", result)
-
-	//multiplicación
-	result = x * y
-	fmt.Println("Multiplicación:", result)
-
-	//división
-	result = y / x
-	fmt.Println("División:", result)
-
-	//modulo
-	result = y % x
-	fmt.Println("Modulo:", result)
-
-	//incremental
-	x++
-	fmt.Println("Incremental:", x)
-
-	//decremental
-	x--
-	fmt.Println("Decremental:", x)
+	//Tipo datos
+	fmt.Printf("helloMessage: %T\n", helloMessage)
+	fmt.Printf("cursos: %T\n", cursos)
 }
