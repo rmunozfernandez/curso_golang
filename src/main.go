@@ -2,26 +2,31 @@ package main
 
 import "fmt"
 
+type car struct {
+	brand string
+	year  int
+}
+
+type persona struct {
+	name string
+	year int
+}
+
+// Cada commit tiene una clase diferente
 func main() {
-	m := make(map[string]int)
+	myCar := car{brand: "Ford", year: 2020}
+	fmt.Println(myCar)
 
-	m["Jose"] = 14
-	m["Pepito"] = 20
+	// Otra manera
+	var otherCar car
+	otherCar.brand = "Ferrari"
+	fmt.Println(otherCar)
 
-	fmt.Println(m)
+	human := persona{name: "Rodrigo", year: 38}
+	fmt.Println(human)
 
-	// Recorrer map
-	for i, v := range m {
-		fmt.Println(i, v)
-	}
-	//puede que lo recorra aleatoriamente
-
-	// Encontrar un valor
-	value := m["Jose"]
-	fmt.Println(value)
-
-	// Encontrar un valor que no está dentro de map
-	value2, ok := m["Josep"]
-	fmt.Println(value2, ok)
-
+	var human2 persona
+	human2.name = "Paula"
+	human2.year = 40
+	fmt.Println(human2)
 }
