@@ -1,31 +1,35 @@
 package main
 
-import "fmt"
+func normalFunction(message string) {
+	println(message)
+}
+
+// buena practica: al declarar mismos tipos de dato, solo declararlo en el último dato
+func tripleArgument(a, b int, c string) {
+	println(a, b, c)
+}
+
+// retorna una valor int
+func returnValue(a int) int {
+	return a * 2
+}
+
+// retorcida la devolución de dos datos
+func dobleReturn(a int) (c, d int) {
+	return a, a * 2
+}
 
 func main() {
-	//declaración de variables
-	helloMessage := "Hello"
-	worldMessage := "world"
+	normalFunction("Hola mundo")
+	tripleArgument(1, 2, "Hola")
 
-	//Println
-	fmt.Println(helloMessage, worldMessage)
-	fmt.Println(helloMessage, worldMessage)
+	value := returnValue(2)
+	println("Value:", value)
 
-	//Printf
-	nombre := "Platzi"
-	cursos := 500
-	fmt.Printf("%s tiene más de %d cursos\n", nombre, cursos)
-	/*
-		%s el valor a traer es un string
-		%d el valor a traer es un número
-		%v no se sabe el tipo de dato que va a traer, la buena practica es especificar el tipo de dato
-	*/
+	value1, value2 := dobleReturn(2)
+	println("value1 y value2", value1, value2)
 
-	//Sprintf
-	message := fmt.Sprintf("%s tiene más de %d cursos\n", nombre, cursos)
-	fmt.Print(message)
-
-	//Tipo datos
-	fmt.Printf("helloMessage: %T\n", helloMessage)
-	fmt.Printf("cursos: %T\n", cursos)
+	//cuando se devuelven varios datos de una función, se puede descartar usando el caracter _
+	value1, _ = dobleReturn(3)
+	println("value1: ", value1)
 }
