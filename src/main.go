@@ -1,31 +1,43 @@
 package main
 
-import (
-	"fmt"
-	"go/src/curso_golang_platzi/src/src/pc"
-)
+import "fmt"
+
+type poligono interface {
+	area() float64
+}
+
+type cuadrado struct {
+	base float64
+}
+
+type rectangulo struct {
+	base   float64
+	altura float64
+}
+
+func (c cuadrado) area() float64 {
+	return c.base * c.base
+}
+
+func (r rectangulo) area() float64 {
+	return r.base * r.altura
+}
+
+func calcular(poligono poligono) {
+	fmt.Println("Area: ", poligono.area())
+}
 
 func main() {
+	miCuadrado := cuadrado{base: 2}
+	miRectangulo := rectangulo{base: 2, altura: 4}
 
-	a := 10
-	b := &a
+	fmt.Println(miCuadrado)
+	fmt.Println(miRectangulo)
 
-	fmt.Println(b)
-	fmt.Println(*b)
+	calcular(miCuadrado)
+	calcular(miRectangulo)
 
-	// El * hace referencia al valor guardado en la dirección de memoria
-	// y el & hace referencia a la dirección de memoria.
-
-	*b = 100
-	fmt.Println(a)
-
-	var myPC pc.Pc
-	myPC.Brand = "MSI"
-	myPC.Disk = 400
-	myPC.Ram = 64
-
-	fmt.Println(myPC)
-
-	myPC.DuplicateRAM()
-	fmt.Println(myPC)
+	// Lista de interfaces
+	myInterface := []interface{}{"Hola", 12, 4.90}
+	fmt.Println(myInterface...)
 }
