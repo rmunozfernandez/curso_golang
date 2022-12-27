@@ -1,20 +1,9 @@
 package main
 
-import "fmt"
-
-type pc struct {
-	ram   int
-	disk  int
-	brand string
-}
-
-func (myPC pc) ping() {
-	fmt.Println(myPC.brand, "Pong")
-}
-
-func (myPC *pc) duplicateRAM() {
-	myPC.ram *= 2
-}
+import (
+	"fmt"
+	"go/src/curso_golang_platzi/src/src/pc"
+)
 
 func main() {
 
@@ -30,13 +19,17 @@ func main() {
 	*b = 100
 	fmt.Println(a)
 
-	myPC := pc{ram: 16, disk: 200, brand: "MSI"}
+	var myPC pc.Pc
+	myPC.Brand = "MSI"
+	myPC.Disk = 400
+	myPC.Ram = 64
+
 	fmt.Println(myPC)
 
-	myPC.ping()
-	myPC.duplicateRAM()
+	myPC.Ping()
+	myPC.DuplicateRAM()
 	fmt.Println(myPC)
 
-	myPC.duplicateRAM()
+	myPC.DuplicateRAM()
 	fmt.Println(myPC)
 }
