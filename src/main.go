@@ -26,10 +26,6 @@ func main() {
 
 	fmt.Println(myPC)
 
-	myPC.Ping()
-	myPC.DuplicateRAM()
-	fmt.Println(myPC)
-
 	myPC.DuplicateRAM()
 	fmt.Println(myPC)
 }

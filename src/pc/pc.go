@@ -15,3 +15,7 @@ func (myPC Pc) Ping() {
 func (myPC *Pc) DuplicateRAM() {
 	myPC.Ram *= 2
 }
+
+func (myPc Pc) String() string {
+	return fmt.Sprintf("Tengo un pc marca %s con un disco de %d GB y %d GB de RAM", myPc.Brand, myPc.Disk, myPc.Ram)
+}
