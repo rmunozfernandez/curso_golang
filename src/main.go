@@ -1,43 +1,34 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sync"
+	"time"
+)
 
-type poligono interface {
-	area() float64
-}
+func say(text string, wg *sync.WaitGroup) {
 
-type cuadrado struct {
-	base float64
-}
+	defer wg.Done()
 
-type rectangulo struct {
-	base   float64
-	altura float64
-}
-
-func (c cuadrado) area() float64 {
-	return c.base * c.base
-}
-
-func (r rectangulo) area() float64 {
-	return r.base * r.altura
-}
-
-func calcular(poligono poligono) {
-	fmt.Println("Area: ", poligono.area())
+	fmt.Println(text)
 }
 
 func main() {
-	miCuadrado := cuadrado{base: 2}
-	miRectangulo := rectangulo{base: 2, altura: 4}
+	//WaitGroup - Acumular un conjunto de gorutines
+	var wg sync.WaitGroup
 
-	fmt.Println(miCuadrado)
-	fmt.Println(miRectangulo)
+	//say("Hello")
+	fmt.Println("Hello")
+	wg.Add(1)
 
-	calcular(miCuadrado)
-	calcular(miRectangulo)
+	go say("world", &wg)
 
-	// Lista de interfaces
-	myInterface := []interface{}{"Hola", 12, 4.90}
-	fmt.Println(myInterface...)
+	wg.Wait()
+
+	//Función anónima
+	go func(text string) {
+		fmt.Println(text)
+	}("Adios")
+
+	time.Sleep(time.Second * 1) //no es eficiente
 }
