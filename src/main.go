@@ -1,34 +1,21 @@
 package main
 
-import (
-	"fmt"
-	"sync"
-	"time"
-)
+import "fmt"
 
-func say(text string, wg *sync.WaitGroup) {
-
-	defer wg.Done()
-
-	fmt.Println(text)
+// El channel va a recibir el dato cuando tiene la flecha al lado derecho <-
+func say(text string, c chan<- string) {
+	//el channel recibe el dato
+	c <- text
 }
 
 func main() {
-	//WaitGroup - Acumular un conjunto de gorutines
-	var wg sync.WaitGroup
+	c := make(chan string, 1) //creación del channel
 
-	//say("Hello")
 	fmt.Println("Hello")
-	wg.Add(1)
 
-	go say("world", &wg)
+	//se crea la gorutine
+	go say("world", c)
 
-	wg.Wait()
-
-	//Función anónima
-	go func(text string) {
-		fmt.Println(text)
-	}("Adios")
-
-	time.Sleep(time.Second * 1) //no es eficiente
+	//obtenemos el dato de salida del channel
+	fmt.Println(<-c)
 }
