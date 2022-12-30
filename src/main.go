@@ -1,21 +1,48 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
-// El channel va a recibir el dato cuando tiene la flecha al lado derecho <-
-func say(text string, c chan<- string) {
-	//el channel recibe el dato
+func message(text string, c chan<- string) {
 	c <- text
 }
 
 func main() {
-	c := make(chan string, 1) //creación del channel
+	c := make(chan string, 2)
 
-	fmt.Println("Hello")
+	c <- "Mensaje1"
+	c <- "Mensaje2"
 
-	//se crea la gorutine
-	go say("world", c)
+	/*
+		len(v Type) int
+		The len built-in function returns the length of v.
 
-	//obtenemos el dato de salida del channel
-	fmt.Println(<-c)
+		cap(v Type) int
+		The cap built-in function returns the capacity of v.
+	*/
+	fmt.Println(len(c), cap(c))
+
+	close(c)
+
+	//Recorrer un channel
+	for message := range c {
+		fmt.Println(message)
+	}
+
+	//Select
+	email1 := make(chan string, 1)
+	email2 := make(chan string, 1)
+
+	go message("Mensaje 1", email1)
+	go message("Mensaje 2", email2)
+
+	for i := 0; i < 2; i++ {
+		select {
+		case m1 := <-email1:
+			fmt.Println(m1)
+		case m2 := <-email2:
+			fmt.Println(m2)
+		}
+	}
 }
